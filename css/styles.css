@@ -14,7 +14,7 @@
   --bs-blue: #0d6efd;
   --bs-indigo: #6610f2;
   --bs-purple: #6f42c1;
-  --bs-pink: #d63384;
+  --bs-pink: #ecb2df;
   --bs-red: #dc3545;
   --bs-orange: #fd7e14;
   --bs-yellow: #ffc107;
@@ -42,8 +42,11 @@
   --bs-danger: #dc3545;
   --bs-light: #f8f9fa;
   --bs-dark: #212529;
-  --bs-primary-rgb: 26, 188, 156;
+  --bs-primary-rgb: 93,156,214;
+  --bs-alternate-rgb: 236, 178, 223;
   --bs-secondary-rgb: 44, 62, 80;
+  --bs-darkpurple-rgb:52, 47, 102;
+  --bs-highlight-rgb: 153, 164, 232;
   --bs-success-rgb: 25, 135, 84;
   --bs-info-rgb: 13, 202, 240;
   --bs-warning-rgb: 255, 193, 7;
@@ -103,6 +106,14 @@ body {
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
+
+.profile-img {
+  width: 150px; /* Adjust to your desired size */
+  border-radius: 50%; /* Makes it circular */
+  object-fit: cover; /* Ensures the image is cropped properly */
+  filter: drop-shadow(0 0 25px rgba(0, 0, 0, .5)); /* Softer shadow effect */
+}
+
 
 hr {
   margin: 1rem 0;
@@ -8039,6 +8050,11 @@ textarea.form-control-lg {
   color: rgba(var(--bs-primary-rgb), var(--bs-text-opacity)) !important;
 }
 
+.text-highlight {
+  --bs-text-opacity: 1;
+  color: rgba(var(--bs-highlight-rgb), var(--bs-text-opacity)) !important;
+}
+
 .text-secondary {
   --bs-text-opacity: 1;
   color: rgba(var(--bs-secondary-rgb), var(--bs-text-opacity)) !important;
@@ -8128,6 +8144,21 @@ textarea.form-control-lg {
 .bg-primary {
   --bs-bg-opacity: 1;
   background-color: rgba(var(--bs-primary-rgb), var(--bs-bg-opacity)) !important;
+}
+
+.bg-alternate {
+  --bs-bg-opacity: 1;
+  background-color: rgba(var(--bs-alternate-rgb), var(--bs-bg-opacity)) !important;
+}
+
+.bg-darkpurple {
+  --bs-bg-opacity: 1;
+  background-color: rgba(var(--bs-darkpurple-rgb), var(--bs-bg-opacity)) !important;
+}
+
+.bg-highlight {
+  --bs-bg-opacity: 1;
+  background-color: rgba(var(--bs-highlight-rgb), var(--bs-bg-opacity)) !important;
 }
 
 .bg-secondary {
@@ -11009,7 +11040,7 @@ html {
   left: 0;
   transition: all 0.2s ease-in-out;
   opacity: 0;
-  background-color: rgba(26, 188, 156, 0.9);
+  background-color: rgba(173, 82, 168, 0.9);
 }
 .portfolio .portfolio-item .portfolio-item-caption:hover {
   opacity: 1;
