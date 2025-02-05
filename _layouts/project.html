@@ -1,0 +1,15 @@
+---
+layout: default
+---
+
+<h1>{{ page.title }}</h1>
+
+<!--<p><img src="{{ page.image | relative_url }}" alt="{{ page.imagealt }}" class="project-image" /></p>-->
+
+{{ content }}
+
+<p><strong>Resources Used</strong>: {{ page.resources | join: ", " }}</p>
+
+<a href={{ "/" | relative_url }} class="back-arrow">
+    <i class="bi bi-arrow-left-circle-fill"></i> Back to Home
+</a>
