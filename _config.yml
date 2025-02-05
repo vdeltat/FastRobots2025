@@ -14,8 +14,9 @@ subtitle                 : # site tagline that appears below site title in masth
 name                     : Angela Voo
 description              : Angela Voo - Projects and CV 
 repository               : "vdeltat/FastRobots20205/"
-baseurl                  : "/FastRobots2025" # Set this to "portfolio-<your-github-username>" 
 url                      : "https://vdeltat.github.io/" # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
+baseurl                  : "/FastRobots2025" # Set this to "portfolio-<your-github-username>" 
+
 
 # Theme and Style
 theme: jekyll-theme-minimal
