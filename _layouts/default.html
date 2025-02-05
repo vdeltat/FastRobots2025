@@ -19,8 +19,7 @@
           <span class="navbar-toggler-icon"></span>
         </button>  
         <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ms-auto">
-            
+          <ul class="navbar-nav ms-auto">            
             <li class="nav-item">
               <a class="nav-link {% if page.url == '/' %}active{% endif %}" href="{{ "/" | relative_url }}">Home</a>
             </li>
@@ -42,6 +41,17 @@
   
   <main class="container">
     {{ content }}
+    <div class="gallery-container">
+      <div class="project-gallery">
+          {% for project in site.projects %}
+            <div class="gallery-item">
+              <a href="{{ project.url | relative_url }}">
+                <p>{{ project.title}}</p>
+              </a>
+            </div>
+          {% endfor %}
+      </div>
+    </div>
   </main>
 
   <footer class="footer navbar-dark text-white text-center";>
