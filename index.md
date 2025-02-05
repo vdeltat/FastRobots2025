@@ -17,17 +17,7 @@ Labs:
 
 <!--<p><a href="{{ "/lab1b/" | relative_url }}">Lab 1B</a></p>-->
 
-<div class="gallery-container">
-<div class="project-gallery">
-    {% for project in site.projects %}
-      <div class="gallery-item">
-        <a href="{{ project.url | relative_url }}">
-          <p>{{ project.title}}</p>
-        </a>
-      </div>
-    {% endfor %}
-</div>
-</div>
+
 
 
 
