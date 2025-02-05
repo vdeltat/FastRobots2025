@@ -13,8 +13,9 @@ title_separator          : "-"
 subtitle                 : # site tagline that appears below site title in masthead
 name                     : Angela Voo
 description              : Angela Voo - Projects and CV 
-baseurl                  : "" # Set this to "portfolio-<your-github-username>" 
-url                      : # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
+repository               : "vdeltat/FastRobots20205/
+baseurl                  : "/FastRobots2025" # Set this to "portfolio-<your-github-username>" 
+url                      : "https://vdeltat.github.io/" # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 
 # Theme and Style
 theme: jekyll-theme-minimal
