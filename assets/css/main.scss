@@ -6,5 +6,6 @@
 $color_scheme: '{{ site.color_scheme }}';
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Merriweather:wght@400;700&display=swap');
+@import "{{ site.theme }}";
 @import "custom";
 
