@@ -1,7 +1,7 @@
 ---
 layout: project
-title: Lab 1A
-description: Lab 1A Writeup
+title: Lab 1B
+description: Lab 1B Writeup
 permalink: /lab1b/
 ---
 
