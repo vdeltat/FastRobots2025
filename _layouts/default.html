@@ -42,17 +42,6 @@
   <main class="container">
     {{ content }}
   </main>
-  <div class="container">
-    <div class="project-gallery">
-        {% for project in site.projects %}
-          <div class="gallery-item">
-            <a href="{{ project.url | relative_url }}">
-              <p>{{ project.title}}</p>
-            </a>
-          </div>
-        {% endfor %}
-    </div>
-  </div>
 
   <footer class="footer navbar-dark text-white text-center";>
     <div class="container">
