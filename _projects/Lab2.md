@@ -1,8 +1,8 @@
 ---
 layout: project
-title: Lab 1A
-description: Lab 1A Writeup
-permalink: /lab1b/
+title: Lab 2
+description: Lab 2 Writeup
+permalink: /lab2/
 ---
 
 Lab1b writeup
