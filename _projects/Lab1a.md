@@ -11,7 +11,7 @@ Objective: Familiarize myself with Arduino IDE and the SparkFun RedBoard Artemis
 
 Plugged in the Artemis board using a USB to my computer and selected the correct Board and Port in the ArduinoIDE.
 
-<p style="text-align:center;"><img src="\assets\images\1a\Part1.png" width="950"/></p>
+<p style="text-align:center;"><img src="..\assets\images\1a\Part1.png" width="950"/></p>
 
 <h3>Task 2</h3>
 
@@ -23,7 +23,7 @@ File -> Examples -> 01.Basics: Blink - blinks the LED on the board.
 <h3>Task 3</h3>
 File -> Examples -> Apollo3: Example4_Serial. I tested the serial communication between the board and the computer to send and receive information, which is useful for debugging. For it to work, the serial monitor has to match the baud rate set in the code: 115200.
 
-<p style="text-align:center;"><img src="\assets\images\1a\Part3.png" width="950"/></p>
+<p style="text-align:center;"><img src="..\assets\images\1a\Part3.png" width="950"/></p>
 
 <h3>Task 4</h3>
 File -> Examples -> Apollo3: Example2_analogRead. Used this file to test the temperature sensor on the Artemis board. I wrapped my hand, which is warmer than room temperature, around the artemis board, heating it up. You can see the temperature reading rise in the video.
