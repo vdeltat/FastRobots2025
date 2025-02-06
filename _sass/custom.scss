@@ -49,18 +49,18 @@ header, footer {
   background: $primary-color;
   color: $background-color;
   position: relative; /* Ensure it remains independent of other elements */
+  width: 100%;
 }
 
 header {
   margin-bottom: 40px;
-  width: 100%;
 }
 
 footer {
   text-align: center;
   margin-top: 40px;
   font-size: 0.9em;
-  width: 100%;
+  flex: 1;
 }
 
 .container {
