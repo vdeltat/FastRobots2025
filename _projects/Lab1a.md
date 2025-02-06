@@ -17,7 +17,8 @@ Plugged in the Artemis board using a USB to my computer and selected the correct
 
 File -> Examples -> 01.Basics: Blink - blinks the LED on the board.
 
-<p style="text-align:center;"><iframe width="420" height="315" src="https://youtube.com/shorts/weIj_8gWCqY?si=yzrnF_VWLKHQ62QC"></iframe></p>
+<p style="text-align:center;"><iframe width="420" height="315" src="https://www.youtube.com/embed/weIj_8gWCqY" allowfullscreen></iframe></p>
+
 
 <h3>Task 3</h3>
 File -> Examples -> Apollo3: Example4_Serial. I tested the serial communication between the board and the computer to send and receive information, which is useful for debugging. For it to work, the serial monitor has to match the baud rate set in the code: 115200.
