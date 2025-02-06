@@ -29,8 +29,7 @@ Send three floats to the Artemis board using the SEND_THREE_FLOATS command and e
 
 Add a command GET_TIME_MILLIS which makes the robot reply write a string such as “T:123456” to the string characteristic.
 
-<pre><code class="language-c
-">
+<pre><code class="language-c">
 case GET_TIME_MILLIS:
     unsigned long t;
     t = millis(); // current time in ms
