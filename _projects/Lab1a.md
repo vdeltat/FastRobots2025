@@ -17,7 +17,7 @@ Plugged in the Artemis board using a USB to my computer and selected the correct
 
 File -> Examples -> 01.Basics: Blink - blinks the LED on the board.
 
-<p style="text-align:center;"><iframe width="420" height="315" src="https://www.youtube.com/embed/weIj_8gWCqY" allowfullscreen></iframe></p>
+<iframe width="420" height="600" src="https://www.youtube.com/embed/weIj_8gWCqY" allowfullscreen></iframe>
 
 
 <h3>Task 3</h3>
@@ -28,14 +28,14 @@ File -> Examples -> Apollo3: Example4_Serial. I tested the serial communication 
 <h3>Task 4</h3>
 File -> Examples -> Apollo3: Example2_analogRead. Used this file to test the temperature sensor on the Artemis board. I wrapped my hand, which is warmer than room temperature, around the artemis board, heating it up. You can see the temperature reading rise in the video.
 
-<p style="text-align:center;"><iframe width="420" height="315" src="https://youtube.com/shorts/hHAIVsQY7iU?si=isEDf4ue2PI6rOWf"></iframe></p>
+<iframe width="420" height="600" src="https://www.youtube.com/embed/hHAIVsQY7iU" allowfullscreen></iframe>
 
 <h3>Task 5</h3>
 In File -> Examples -> PDM: Example1_MicrophoneOutput. This file is used to test out the microphone. It outputs the highest frequency to the serial monitor.
 
-<p style="text-align:center;"><iframe width="420" height="315" src="https://youtube.com/shorts/csPM9cUji4Q?si=iwdIs7xVxpUIaXPH"></iframe></p>
+<iframe width="420" height="600" src="https://www.youtube.com/embed/csPM9cUji4Q" allowfullscreen></iframe>
 
 <h3>Additional task 1</h3>
 Program the board to blink an LED when you play a musical “C” note over the speaker, and off otherwise. Use your phone, computer, or similar to generate the sound. If you’re having fun you could even combine the microphone and the Serial output to generate an electronic tuner.
 
-<p style="text-align:center;"><iframe width="420" height="315" src="https://youtube.com/shorts/Z4TAi1dXcYM?si=Xfcv2tU_vs3fqCHm"></iframe></p>
+<iframe width="420" height="600" src="https://www.youtube.com/embed/Z4TAi1dXcYM" allowfullscreen></iframe>
