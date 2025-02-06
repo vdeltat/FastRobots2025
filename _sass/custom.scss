@@ -48,13 +48,13 @@ header, footer {
   padding: 10px 5px;
   background: $primary-color;
   color: $background-color;
+  position: relative; /* Ensure it remains independent of other elements */
+  z-index: 10; /* Bring it above other elements */
 }
 
 header {
   margin-bottom: 40px;
   width: 100%;
-  position: relative; /* Ensure it remains independent of other elements */
-  z-index: 10; /* Bring it above other elements */
 }
 
 footer {
