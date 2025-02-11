@@ -29,7 +29,7 @@ Send three floats to the Artemis board using the SEND_THREE_FLOATS command and e
 
 Add a command GET_TIME_MILLIS which makes the robot reply write a string such as “T:123456” to the string characteristic.
 
-<pre><code class="language-cpp">case GET_TIME_MILLIS:
+<pre class='brush: cpp'>case GET_TIME_MILLIS:
     unsigned long t;
     t = millis(); // current time in ms
     char time[20];
@@ -41,27 +41,29 @@ Add a command GET_TIME_MILLIS which makes the robot reply write a string such as
     
     Serial.println(tx_estring_value.c_str());
     break;
-</code></pre>
+</pre>
 
-<pre><code class="language-cpp">
-void setup() {
-    Serial.begin(9600);
-}
-
-void loop() {
-    Serial.println("Hello, World!");
-    delay(1000);
-}
-</code></pre>
 
 
 ## Task 4
 
 Setup a notification handler in Python to receive the string value (the BLEStringCharactersitic in Arduino) from the Artemis board. In the callback function, extract the time from the string.
 
+
+def notif_handler(uuid, data):
+    notif = ble.bytearray_to_string(data)
+
+    if("|" in notif):
+        split = notif.split(" | ")
+        print("Sample " + split[0] + ": " + split[1] + " ms is the current time and " + split[2] + " deg F is the current temp.")
+    else:
+        print("Current time: " + notif + " ms\n")
+
 ## Task 5
 
 Write a loop that gets the current time in milliseconds and sends it to your laptop to be received and processed by the notification handler. Collect these values for a few seconds and use the time stamps to determine how fast messages can be sent. What is the effective data transfer rate of this method?
+
+The effective data transfer rate is 125/5 = 25 data points a second.
 
 <p style="text-align:center;"><img src="..\assets\images\1b\1b_5.png" width="550"/></p>
 <p style="text-align:center;"><img src="..\assets\images\1b\1b_5_2.png" width="500"/></p>
@@ -78,6 +80,8 @@ Add a second array that is the same size as the time stamp array. Use this array
 
 ## Task 8
 Discuss the differences between these two methods, the advantages and disadvantages of both and the potential scenarios that you might choose one method over the other. How “quickly” can the second method record data? The Artemis board has 384 kB of RAM. Approximately how much data can you store to send without running out of memory?
+
+
 
 ## Additional Task 1: Effective Data Rate And Overhead
 
