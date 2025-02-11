@@ -29,7 +29,7 @@ Send three floats to the Artemis board using the SEND_THREE_FLOATS command and e
 
 Add a command GET_TIME_MILLIS which makes the robot reply write a string such as “T:123456” to the string characteristic.
 
-<pre><code class="language-c">case GET_TIME_MILLIS:
+<pre><code class="language-cpp">case GET_TIME_MILLIS:
     unsigned long t;
     t = millis(); // current time in ms
     char time[20];
@@ -43,13 +43,6 @@ Add a command GET_TIME_MILLIS which makes the robot reply write a string such as
     break;
 </code></pre>
 
-<pre><code class="language-javascript">
-function helloWorld() {
-    console.log("Hello, World!");
-}
-</code></pre>
-
-
 ## Task 4
 
 Setup a notification handler in Python to receive the string value (the BLEStringCharactersitic in Arduino) from the Artemis board. In the callback function, extract the time from the string.
@@ -58,18 +51,18 @@ Setup a notification handler in Python to receive the string value (the BLEStrin
 
 Write a loop that gets the current time in milliseconds and sends it to your laptop to be received and processed by the notification handler. Collect these values for a few seconds and use the time stamps to determine how fast messages can be sent. What is the effective data transfer rate of this method?
 
-<p style="text-align:center;"><img src="..\assets\images\1b\1b_5.png" width="950"/></p>
-<p style="text-align:center;"><img src="..\assets\images\1b\1b_5_2.png" width="950"/></p>
+<p style="text-align:center;"><img src="..\assets\images\1b\1b_5.png" width="550"/></p>
+<p style="text-align:center;"><img src="..\assets\images\1b\1b_5_2.png" width="500"/></p>
 
 ## Task 6
 Now create an array that can store time stamps. This array should be defined globally so that other functions can access it if need be. In the loop, rather than send each time stamp, place each time stamp into the array. (Note: you’ll need some extra logic to determine when your array is full so you don’t “over fill” the array.) Then add a command SEND_TIME_DATA which loops the array and sends each data point as a string to your laptop to be processed. (You can store these values in a list in python to determine if all the data was sent over.)
 
-<p style="text-align:center;"><img src="..\assets\images\1b\1b_6.png" width="950"/></p>
+<p style="text-align:center;"><img src="..\assets\images\1b\1b_6.png" width="550"/></p>
 
 ## Task 7
 Add a second array that is the same size as the time stamp array. Use this array to store temperature readings. Each element in both arrays should correspond, e.e., the first time stamp was recorded at the same time as the first temperature reading. Then add a command GET_TEMP_READINGS that loops through both arrays concurrently and sends each temperature reading with a time stamp. The notification handler should parse these strings and add populate the data into two lists.
 
-<p style="text-align:center;"><img src="..\assets\images\1b\1b_7.png" width="950"/></p>
+<p style="text-align:center;"><img src="..\assets\images\1b\1b_7.png" width="700"/></p>
 
 ## Task 8
 Discuss the differences between these two methods, the advantages and disadvantages of both and the potential scenarios that you might choose one method over the other. How “quickly” can the second method record data? The Artemis board has 384 kB of RAM. Approximately how much data can you store to send without running out of memory?
