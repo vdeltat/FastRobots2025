@@ -11,7 +11,7 @@ Objective: Set up bluetooth connection with the Artemis Board and be able to rec
 
 I setup the bluetooth connection, changing the MAC Address in connections.yml to the MAC Address of the Artemis Board: c0:81:55:22:a3:64. I also generated the unique UUID, **e3ad7b8e-2664-4c72-954c-22bb7d2e4c55**, using uuid64() in python, and defined it in ble_arduino.ino and connections.yaml. 
 
-<p style="text-align:center;"><img src="..\assets\images\1b\1b_demo.png" width="950"/></p>
+<p style="text-align:center;"><img src="..\assets\images\1b\1b_demo.png" width="500"/></p>
 
 ## Task 1
 
@@ -23,14 +23,13 @@ Send a string value from the computer to the Artemis board using the ECHO comman
 
 Send three floats to the Artemis board using the SEND_THREE_FLOATS command and extract the three float values in the Arduino sketch.
 
-<p style="text-align:center;"><img src="..\assets\images\1b\1b_2.png" width="950"/></p>
+<p style="text-align:center;"><img src="..\assets\images\1b\1b_2.png" width="500"/></p>
 
 ## Task 3
 
 Add a command GET_TIME_MILLIS which makes the robot reply write a string such as “T:123456” to the string characteristic.
 
-<pre><code class="language-c">
-case GET_TIME_MILLIS:
+<pre><code class="language-c">case GET_TIME_MILLIS:
     unsigned long t;
     t = millis(); // current time in ms
     char time[20];
@@ -42,6 +41,12 @@ case GET_TIME_MILLIS:
     
     Serial.println(tx_estring_value.c_str());
     break;
+</code></pre>
+
+<pre><code class="language-javascript">
+function helloWorld() {
+    console.log("Hello, World!");
+}
 </code></pre>
 
 
