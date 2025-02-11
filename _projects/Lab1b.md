@@ -43,6 +43,18 @@ Add a command GET_TIME_MILLIS which makes the robot reply write a string such as
     break;
 </code></pre>
 
+<pre><code class="language-cpp">
+void setup() {
+    Serial.begin(9600);
+}
+
+void loop() {
+    Serial.println("Hello, World!");
+    delay(1000);
+}
+</code></pre>
+
+
 ## Task 4
 
 Setup a notification handler in Python to receive the string value (the BLEStringCharactersitic in Arduino) from the Artemis board. In the callback function, extract the time from the string.
