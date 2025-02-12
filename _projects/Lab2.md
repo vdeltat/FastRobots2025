@@ -9,7 +9,7 @@ permalink: /lab2/
 
 The AD0_VAL defines the value of pin AD0 that determines the LSB bit of the 7-bit slave address of the ICM-20948. In other words, it controls the X bit in b110100X.
 
-<p style="text-align:center;"><img src="..\assets\images\1b\p1_1.png" width="550"/></p>
+<p style="text-align:center;"><img src="..\assets\images\2\p1_1.png" width="550"/></p>
 
 
 
@@ -18,7 +18,7 @@ Since 1000 mg = 1 g
 
 When I keep the board at rest on the table, the acceleration in the z direction is 1 g, which makes sense because I am pointing the z-direction of the board in the direction of gravity. The accelerations in the other two directions are basically 0, with some deviation due to noise, vibrations, or have a negligent component of gravity in that direction. If I move the board in the x or y direction, the acceleration in the respective direction is shown to increase, as expected.
 
-<p style="text-align:center;"><img src="..\assets\images\1b\p1_2.png" width="550"/></p>
+<p style="text-align:center;"><img src="..\assets\images\2\p1_2.png" width="550"/></p>
 
 When I tilt the board about the x-axis, the y-direction gains a component of gravity and increases its acceleration in y while decreasing the acceleration in z, and vice versa about the y-axis.
 
@@ -59,9 +59,9 @@ The two-point calibration method provides a corrected value based on the given r
 
 ### Noise
 
-<p style="text-align:center;"><img src="..\assets\images\1b\p2_fftPitch.png" width="550"/></p>
-<p style="text-align:center;"><img src="..\assets\images\1b\p2_fftRoll.png" width="550"/></p>
+<p style="text-align:center;"><img src="..\assets\images\2\p2_fftPitch.png" width="550"/></p>
+<p style="text-align:center;"><img src="..\assets\images\2\p2_fftRoll.png" width="550"/></p>
 
 ### Low Pass Filter
-<p style="text-align:center;"><img src="..\assets\images\1b\p2_PitchLPF.png" width="550"/></p>
-<p style="text-align:center;"><img src="..\assets\images\1b\p2_RollLPF.png" width="550"/></p>
+<p style="text-align:center;"><img src="..\assets\images\2\p2_PitchLPF.png" width="550"/></p>
+<p style="text-align:center;"><img src="..\assets\images\2\p2_RollLPF.png" width="550"/></p>
