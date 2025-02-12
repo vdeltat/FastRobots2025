@@ -15,19 +15,19 @@ I setup the bluetooth connection, changing the MAC Address in connections.yml to
 
 ## Task 1
 
-Send a string value from the computer to the Artemis board using the ECHO command. The computer should then receive and print an augmented string.
+I sent a string value from the computer to the Artemis board using the ECHO command. My computer receives and prints the augmented string.
 
 <p style="text-align:center;"><img src="..\assets\images\1b\1b_1.png" width="950"/></p>
 
 ## Task 2
 
-Send three floats to the Artemis board using the SEND_THREE_FLOATS command and extract the three float values in the Arduino sketch.
+I sent three floats to the Artemis board using the SEND_THREE_FLOATS command and extracted the three float values in the Arduino sketch.
 
 <p style="text-align:center;"><img src="..\assets\images\1b\1b_2.png" width="500"/></p>
 
 ## Task 3
 
-Add a command GET_TIME_MILLIS which makes the robot reply write a string such as “T:123456” to the string characteristic.
+I added the command GET_TIME_MILLIS which makes the robot reply write a string such as “T:123456” where 123456 is the time in ms.
 
 <pre><code class="language-cpp">case GET_TIME_MILLIS:
     unsigned long t;
@@ -44,10 +44,9 @@ Add a command GET_TIME_MILLIS which makes the robot reply write a string such as
 </code></pre>
 
 
-
 ## Task 4
 
-Setup a notification handler in Python to receive the string value (the BLEStringCharactersitic in Arduino) from the Artemis board. In the callback function, extract the time from the string.
+I set up a notification handler in Python to receive the string value from the Artemis board and extract the time from the string.
 
 <pre><code class="language-cpp">def notif_handler(uuid, data):
     notif = ble.bytearray_to_string(data)
@@ -163,7 +162,6 @@ The array was full after 343 ms, so the effective data transfer rate is 2,915 da
 <p style="text-align:center;"><img src="..\assets\images\1b\1b_7.png" width="700"/></p>
 
 ## Task 8
-Discuss the differences between these two methods, the advantages and disadvantages of both and the potential scenarios that you might choose one method over the other. How “quickly” can the second method record data? The Artemis board has 384 kB of RAM. Approximately how much data can you store to send without running out of memory?
 
 Task 5's method allows you to access the data faster in real-time than task 6's method, but it slows the data collection frequency because it is limited by the speed it can send the data over bluetooth. Task 6's method can collect the data faster or at a higher frequency, but has a limited amount of data that can be stored at a time. However this can be mitigated by collecting and sending batches of data every so often.
 
