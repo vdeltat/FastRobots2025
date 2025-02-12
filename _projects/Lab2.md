@@ -57,5 +57,11 @@ Corrected Value = 1.00357 * (Raw Value + 90.68) - 90
 
 The two-point calibration method provides a corrected value based on the given raw value. Usin this method, these equations above provide the calibrated sensor values. The accelerometer is very accurate as shown through the calibration factor being very close to 1. Additionally, the accelerometer measurements are very close to the reference values, being off by at most 2.5 degrees.
 
+### Noise
 
+<p style="text-align:center;"><img src="..\assets\images\1b\p2_fftPitch.png" width="550"/></p>
+<p style="text-align:center;"><img src="..\assets\images\1b\p2_fftRoll.png" width="550"/></p>
 
+### Low Pass Filter
+<p style="text-align:center;"><img src="..\assets\images\1b\p2_PitchLPF.png" width="550"/></p>
+<p style="text-align:center;"><img src="..\assets\images\1b\p2_RollLPF.png" width="550"/></p>
