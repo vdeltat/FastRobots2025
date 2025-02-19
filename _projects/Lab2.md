@@ -9,7 +9,7 @@ permalink: /lab2/
 
 The AD0_VAL defines the value of pin AD0 that determines the LSB bit of the 7-bit slave address of the ICM-20948. In other words, it controls the X bit in b110100X.
 
-<p style="text-align:center;"><img src="..\assets\images\2\p1_1.png" width="300"/></p>
+<p style="text-align:center;"><img src="..\assets\images\2\p1_1.png" width="200"/></p>
 
 <p style="text-align:center;"><img src="..\assets\images\2\p1_2.png" width="950"/></p>
 
@@ -66,8 +66,8 @@ The FFT shows that most of the signal consists of the lower few frequencies. The
 
 To implement the low pass filter, we need to find the value alpha:
 
-<p style="text-align:center;"><img src="..\assets\images\2\eq1.png" width="200"/></p>
-<p style="text-align:center;"><img src="..\assets\images\2\eq2.png" width="200"/></p>
+<p style="text-align:center;"><img src="..\assets\images\2\eq1.png" width="150"/></p>
+<p style="text-align:center;"><img src="..\assets\images\2\eq2.png" width="150"/></p>
 
 where T = Sampling Period, and f_c = cutoff frequency. The alpha for my case is calculated to be 0.039. This filter is implemented as such:
 
