@@ -208,7 +208,7 @@ The final code to collect the IMU data:
 After the IMU data is collected, "sendIMUdata()" is run:
 
 <pre><code class="language-cpp">void sendIMUdata() {
-  for (int j = 0; j < SAMPLES; j++) { 
+  for (int j = 0; j < IMUindex; j++) { 
     tx_estring_value.clear();
     char time_str[20];
     sprintf(time_str, "%lu", time_arr[j]);
