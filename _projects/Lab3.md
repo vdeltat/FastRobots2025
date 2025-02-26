@@ -183,6 +183,14 @@ A snapshot of results is shown below. Both sensors were able to collect data. As
   }
 </code></pre>
 
+## Additional Tasks (5000)
+
+IR Triangulation Sensors determine distance by sending out an infrared pulse at a specific angle and measuring the angle of the reflected signal. These sensors are relatively accurate and insensitive to surface texture or color, making them useful for short-range applications. However, they are bulky, slow, and more expensive than simpler IR sensors.
+
+Amplitude-Based IR Sensors work by comparing the strength of the emitted and received infrared signals. They are inexpensive and compact but only function over short distances and are really sensitive to ambient light, texture, and object color, which can affect the accuracy of measurements.
+
+ToF Sensors like the ones we're using measure distance by timing how long it takes for an infrared laser pulse to travel to an object and return. They're largely unaffected by ambient light, texture, or color. You can get reliable measurements over longer distances but they tend to have a lower sample frequency and a bit higher cost.
+
 
 
 
