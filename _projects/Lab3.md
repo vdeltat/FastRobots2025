@@ -9,7 +9,7 @@ permalink: /lab3/
 
 The default I2C address for the TOF sensor is 0x52 according to the datasheet. Since both sensors share the same default address, one of them needs to be reassigned a different I2C address. I wired the XSHUT pin of one sensor to A2, allowing me to temporarily disable it during startup, assign a new address, and then enable it again. This makes sure both sensors can operate simultaneously.
 
-For placement, I intend to mount one ToF sensor at the front of the car and the other on the right side of the car. The front ToF sensor will be able to see oncoming obstacles, and the ToF sensor on the right side will be able to detect walls to avoid colliding with them, as well as helping with mapping the surroundings. However, the downsides are that the car won't be able to detect obstacles behind it, but if the car doesn't really back up and primarily maneuvers to drive forward in the direction it wants to go, it shouldn't be much of an issue.
+I intend to mount one ToF sensor at the front of the car and the other on the back of the car. The front ToF sensor will be able to see oncoming obstacles, and the back ToF sensor will be able to see obstacles behind the car, which the fron will have no perception of. Although it would be good to have a ToF sensor on a side which will be able to detect walls to avoid colliding with them, it is only for one side, and hopefully the car can control itself enough to not have a full-on crash with the wall. Having a sensor in the front and back can also help with mapping the surroundings. However, the downsides are that the car won't be able to detect obstacles behind it, but if the car doesn't really back up and primarily maneuvers to drive forward in the direction it wants to go, it shouldn't be much of an issue.
 
 <p style="text-align:center;"><img src="..\assets\images\3\Wire_diagram.jpeg" width="950"/></p>
 
@@ -20,7 +20,7 @@ Below shows the two ToF sensors and the IMU connected to the Artemis through the
 
 ## I2C Address
 
-I ran the example code: Examples->Apollo3->Wire->Example05_Wire_I2C.ino
+I ran the example code: Examples --> Apollo3 --> Wire --> Example05_Wire_I2C.ino
 
 After running the scan, the sensor appeared at address 0x29 instead of the expected 0x52. The 0x52 address listed in the datasheet includes the least significant bit (LSB) used for read/write operations in I2C communication. 0x52 = 0b101000, and  0x29 = 0b101001, so Arduino ignores the last bit and only returns the 7-bit address, which results in 0x29 (0x52 >> 1). 
 
@@ -183,7 +183,7 @@ A snapshot of results is shown below. Both sensors were able to collect data. As
   }
 </code></pre>
 
-## Additional Tasks (5000)
+## Optional Additional Tasks (5000)
 
 ### IR-based Sensors
 
