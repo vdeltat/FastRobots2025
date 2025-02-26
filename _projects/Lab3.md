@@ -185,6 +185,8 @@ A snapshot of results is shown below. Both sensors were able to collect data. As
 
 ## Additional Tasks (5000)
 
+### IR-based Sensors
+
 IR Triangulation Sensors determine distance by sending out an infrared pulse at a specific angle and measuring the angle of the reflected signal. These sensors are relatively accurate and insensitive to surface texture or color, making them useful for short-range applications. However, they are bulky, slow, and more expensive than simpler IR sensors.
 
 Amplitude-Based IR Sensors work by comparing the strength of the emitted and received infrared signals. They are inexpensive and compact but only function over short distances and are really sensitive to ambient light, texture, and object color, which can affect the accuracy of measurements.
