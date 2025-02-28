@@ -14,9 +14,11 @@ I intend to mount one ToF sensor at the front of the car and the other on the ba
 <p style="text-align:center;"><img src="..\assets\images\3\Wire_diagram.jpeg" width="950"/></p>
 
 ## ToF Sensor Connections
-Below shows the two ToF sensors and the IMU connected to the Artemis through the Qwiic Multiport. The Artemis is also being powered by the battery, which I soldered the connector onto.
+Below shows the two ToF sensors and the IMU connected to the Artemis through the Qwiic Multiport. The Artemis is also being powered by the battery, which I soldered the connector onto. Artemis is powered on correctly and can send messages completely untethered.
 
 <p style="text-align:center;"><img src="..\assets\images\3\all_sensors_wired.jpeg" width="950"/></p>
+
+<p style="text-align:center;"><iframe width="420" height="600" src="https://www.youtube.com/embed/GpfUcX3QTR0" allowfullscreen></iframe></p>
 
 ## I2C Address
 
