@@ -54,7 +54,7 @@ void loop() {
 
 <p style="text-align:center;"><img src="..\assets\images\4\oscilloscope_display.jpeg" width="950"/></p>
 
-<p style="text-align:center;"><iframe width="600" src="https://www.youtube.com/embed/NSpd1ee3_I0" allowfullscreen></iframe></p>
+<p style="text-align:center;"><iframe width="800" height="600" src="https://www.youtube.com/embed/NSpd1ee3_I0" allowfullscreen></iframe></p>
 
 ## Disassemble Car
 
@@ -98,7 +98,7 @@ void loop() {
 }
 </code></pre>
 
-<p style="text-align:center;"><iframe width="600" src="https://www.youtube.com/embed/x3PPknEzFoY" allowfullscreen></iframe></p>
+<p style="text-align:center;"><iframe width="800" height="600" src="https://www.youtube.com/embed/x3PPknEzFoY" allowfullscreen></iframe></p>
 
 ## Battery-Powered Motors
 
@@ -108,7 +108,7 @@ I soldered the 650mAh battery connector onto the 850mAh connector so that I can 
 
 I then ran the motor powered with just the 850 mAh battery (instead of the power supply).
 
-<p style="text-align:center;"><iframe width="600" src="https://www.youtube.com/embed/OlYvt8hlmX8" allowfullscreen></iframe></p>
+<p style="text-align:center;"><iframe width="800" height="600" src="https://www.youtube.com/embed/OlYvt8hlmX8" allowfullscreen></iframe></p>
 
 ## The Other Motor Driver
 
