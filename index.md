@@ -3,7 +3,7 @@ layout: default
 title: <Angela Voo>
 ---
 
-## Fast Robots - MAE 5190
+## Fast Robots - MAE 4190
 
 
 ![Profile Picture]({{ "assets/images/outside_headshot.JPG" | relative_url }}){: class="profile-image"}
