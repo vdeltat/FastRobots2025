@@ -54,7 +54,7 @@ void loop() {
 
 <p style="text-align:center;"><img src="..\assets\images\4\oscilloscope_display.jpeg" width="950"/></p>
 
-<p style="text-align:center;"><iframe width="420" height="600" src="https://www.youtube.com/embed/NSpd1ee3_I0" allowfullscreen></iframe></p>
+<p style="text-align:center;"><iframe width="600" src="https://www.youtube.com/embed/NSpd1ee3_I0" allowfullscreen></iframe></p>
 
 ## Disassemble Car
 
@@ -98,17 +98,17 @@ void loop() {
 }
 </code></pre>
 
-<p style="text-align:center;"><iframe width="420" height="600" src="https://www.youtube.com/embed/x3PPknEzFoY" allowfullscreen></iframe></p>
+<p style="text-align:center;"><iframe width="600" src="https://www.youtube.com/embed/x3PPknEzFoY" allowfullscreen></iframe></p>
 
 ## Battery-Powered Motors
 
 I soldered the 650mAh battery connector onto the 850mAh connector so that I can charge it with the USB charger we already have to charge the 650 mAh bettery. The connector will also prevent me from plugging in the battery the wrong way, which is very likely if I'm tired and not paying attention. A matching female connector was left over from removing the manufacturer's PCB, so I wired that to the motors. 
 
-<p style="text-align:center;"><img src="..\assets\images\4\battery.jpeg" width="950"/></p>
+<p style="text-align:center;"><img src="..\assets\images\4\battery.jpeg" width="500"/></p>
 
 I then ran the motor powered with just the 850 mAh battery (instead of the power supply).
 
-<p style="text-align:center;"><iframe width="420" height="600" src="https://www.youtube.com/embed/OlYvt8hlmX8" allowfullscreen></iframe></p>
+<p style="text-align:center;"><iframe width="600" src="https://www.youtube.com/embed/OlYvt8hlmX8" allowfullscreen></iframe></p>
 
 ## The Other Motor Driver
 
