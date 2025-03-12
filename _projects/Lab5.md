@@ -7,303 +7,254 @@ permalink: /lab5/
 
 ## Prelab
 
-I planned to connect the motor drivers to pins A0, A1, A3, and A4, since A2 is already being used for the XSHUT on the To F sensor. 
+I created two commands: "START_PID" and "STOP_PID" which I could send over bluetooth to command the robot to start and stop the PID loop. These commands would turn the flag "run_pid" true or false. The PID loop sits in the main loop and runs if run_pid=True.
 
-Wire diagram:
-<p style="text-align:center;"><img src="..\assets\images\4\wire_diagram.jpeg" width="950"/></p>
-
-The motors draw a higher amount of current, especially when starting/stopping and under load (like friction on the wheels). So it makes sense to use a higher capacity battery for the motors. Additionally, microcontrollers like the Artemis need a stable voltage to function correctly. The current spikes from the motors would cause a voltage drop if the Artemis and motors shared the same battery. The voltage drops could cause the Artemis to behave unpredictably or reset. So it is better to have the Artemis and motors on separate batteries.
-
-## First Motor Driver
-
-<p style="text-align:center;"><img src="..\assets\images\4\first_motordriver.jpeg" width="950"/></p>
-
-I soldered the wire connections for the first motor driver and solder them onto pine A0 and A1 on the Artemis Board. I tested the motor driver with a power supply, which I set to 3.7 V. I used the oscilloscope to show the output signal from the motor driver.
-
-<p style="text-align:center;"><img src="..\assets\images\4\oscilloscope_setup.jpeg" width="950"/></p>
-
-To test the motor driver, I ran it through a few different PWM duty cycles:
-
-<pre><code class="language-cpp">#define PWM_PIN 0
-
-void setup() {
-  Serial.begin(9600);
-  pinMode(PWM_PIN, OUTPUT);
-  analogWrite(PWM_PIN, 0);
-  Serial.println("Connected");
-
+<pre><code class="language-cpp">case START_PID: {
+  //reset variables/indeces = 0
+  ...
+  distanceSensor1.setDistanceModeLong();
+  distanceSensor1.startRanging();
+  run_pid = true;
+  break;
 }
 
-void loop() {
-  analogWrite(PWM_PIN, 50);
-  delay(2000);
+case STOP_PID: {
+  Serial.println("STOP_PID");
+  run_pid = false;
+  stopDriving();
+  break;
+}
+</code></pre>
+
+I also created a command "CHANGE_GAIN" to be able to tune the PID gains on the fly over bluetooth rather than uploading code to the board every time I wanted to change a gain value. This included the PID gains as well as alpha for the derivative term low-pass filter. This made the PID tuning process a lot more efficient.
+
+<pre><code class="language-cpp">case CHANGE_GAIN: {
+  Serial.println("CHANGE_GAIN");
+  float new_Kp; float new_Ki; float new_Kd; float new_alpha;
   
-  analogWrite(PWM_PIN, 100);
-  delay(2000);
+  success = robot_cmd.get_next_value(new_Kp);
+  if(!success)
+    return;
 
-  analogWrite(PWM_PIN, 150);
-  delay(2000);
+  success = robot_cmd.get_next_value(new_Ki);
+  if(!success)
+    return;
 
-  analogWrite(PWM_PIN, 200);
-  delay(2000);
-
-  analogWrite(PWM_PIN, 250);
-  delay(2000);
-}
-</code></pre>
-
-<p style="text-align:center;"><img src="..\assets\images\4\oscilloscope_display.jpeg" width="950"/></p>
-
-<p style="text-align:center;"><iframe width="800" height="600" src="https://www.youtube.com/embed/NSpd1ee3_I0" allowfullscreen></iframe></p>
-
-## Disassemble Car
-
-I cut the wires off of the RC car manufacturer's PCB and removed it from the car. Now there's space for my components.
-
-<p style="text-align:center;"><img src="..\assets\images\4\empty_car.jpeg" width="950"/></p>
-
-## Motor
-
-After testing the motor driver, I soldered it to one of the car's motors. I ran the code below to test the motors running in both directions. The motor is still being powered with the power supply.
-
-<pre><code class="language-cpp">#define M1_FWD 1
-#define M1_BWD 0
-
-void setup() {
-  pinMode(M1_FWD, OUTPUT);
-  pinMode(M1_BWD, OUTPUT);
-  analogWrite(M1_FWD, 0);
-  analogWrite(M1_BWD, 0);
-
-  Serial.begin(9600);
-  Serial.println("Connected");
-}
-
-void loop() {
-  // Motor drive forward for 3s
-  analogWrite(M1_FWD, 255);
-  delay(3000);
+  success = robot_cmd.get_next_value(new_Kd);
+  if(!success)
+    return;
   
-  // Stop for 1s
-  analogWrite(M1_FWD, 0); 
-  delay(2000);
+  success = robot_cmd.get_next_value(new_alpha);
+  if(!success)
+    return;
 
-  // Motor drive backward for 3s
-  analogWrite(M1_BWD, 255);
-  delay(3000);
+  Kp = new_Kp;
+  Ki = new_Ki;
+  Kd = new_Kd;
+  d_alpha = new_alpha;
 
-  // Stop for 1s
-  analogWrite(M1_BWD, 0); 
-  delay(2000);
+  break;
 }
 </code></pre>
 
-<p style="text-align:center;"><iframe width="800" height="600" src="https://www.youtube.com/embed/x3PPknEzFoY" allowfullscreen></iframe></p>
+I also didn't want the PID loop to automatically send the data every time it finished while I repetively tuned the gains, so I created separate commands to do that as well: 
 
-## Battery-Powered Motors
-
-I soldered the 650mAh battery connector onto the 850mAh connector so that I can charge it with the USB charger we already have to charge the 650 mAh bettery. The connector will also prevent me from plugging in the battery the wrong way, which is very likely if I'm tired and not paying attention. A matching female connector was left over from removing the manufacturer's PCB, so I wired that to the motors. 
-
-<p style="text-align:center;"><img src="..\assets\images\4\battery.jpeg" width="500"/></p>
-
-I then ran the motor powered with just the 850 mAh battery (instead of the power supply).
-
-<p style="text-align:center;"><iframe width="800" height="600" src="https://www.youtube.com/embed/OlYvt8hlmX8" allowfullscreen></iframe></p>
-
-## The Other Motor Driver
-
-I wired the other motor driver the same way, onto pins A3 and A4 on the Artemis Board. I ran the code below to test both motors:
-
-<pre><code class="language-cpp">#define ML_FWD 1
-#define ML_BWD 0
-#define MR_FWD 3
-#define MR_BWD 4
-
-void setup() {
-  pinMode(ML_FWD, OUTPUT);
-  pinMode(ML_BWD, OUTPUT);
-  pinMode(MR_FWD, OUTPUT);
-  pinMode(MR_BWD, OUTPUT);
-
-  Serial.begin(9600);
-  Serial.println("Connected");
+<pre><code class="language-cpp">case SEND_PID_DATA: {
+  sendpidData();
+  break;
 }
 
-void loop() {
-  //Pause: allow time to disconnect battery or reset position
-  delay(10000);
+case SEND_TOF_DATA: {
+  sendToFData();
+  break;
+}
 
-  analogWrite(ML_FWD, 100);
-  analogWrite(MR_FWD, 100);
-  delay(1200);
+void sendpidData() {
+  for (int j = 0; j < PIDindex; j++) { 
+    tx_estring_value.clear();
+    float pid_time = (float) pidtime_arr[j]/1000 - (float) startTime; //convert to ms
+    tx_estring_value.append(pid_time);
+    tx_estring_value.append(" | ");        
+    tx_estring_value.append(distance_pid[j]);
+    tx_estring_value.append(" | "); 
+    tx_estring_value.append(pwm_arr[j]);
+    tx_characteristic_string.writeValue(tx_estring_value.c_str());
+    delay(5);
+  }
+}
 
-  analogWrite(ML_FWD, 0);
-  analogWrite(MR_FWD, 0);
-  delay(2000);
-
-  analogWrite(ML_BWD, 100);
-  analogWrite(MR_BWD, 100);
-  delay(1200);
-
-  analogWrite(MR_BWD, 0);
-  analogWrite(ML_BWD, 0);
-  delay(2000);
+void sendToFData() {
+  for (int i = 0; i < ToFindex; i++) { 
+    tx_estring_value.clear();
+    char time_str[20];
+    sprintf(time_str, "%lu", toftime_arr[i]-startTime);
+    tx_estring_value.append(time_str);  
+    tx_estring_value.append(" | ");        
+    tx_estring_value.append(ToF_distance[i]);
+    tx_characteristic_string.writeValue(tx_estring_value.c_str());
+    delay(5);
+  }
 }
 </code></pre>
 
-<p style="text-align:center;"><iframe width="420" height="600" src="https://www.youtube.com/embed/AFMzUrTeUh4" allowfullscreen></iframe></p>
+## PID Control
 
-## Secure Components to Chassis
+One thing to note is that I set the maximum speed at 100 PWM so the robot would never crash into the wall at too high speed. For practical purposes I set constraints on the speed. If the PID loop wanted to give a control input greater than the maximum PWM, it would set it at the max PWM. If the control input was lower than a certain threshold I set (which I settled finally on 10 PWM), it would set the control input to zero, since a low enough control input was effectively zero and wouldn't really move the robot. However, as we found in lab 4, the robot would not be able move at low PWM values, so I set a minimum speed at 40 PWM. If the resulting control input from the PID controllers was above the zero threshold, but less than the minimum speed, it would set the control input to the minimum speed so that the robot could actually move. Since the integral term can accumulate pretty quickly (integral wind-up) and lead to instability, I also constrained its max constribution to the control input to be 300. I put a low-pass filter on the the derivative term to reduce noise, and tuned d_alpha.
 
-To get everything soldered together and so that I can have the robot drive on the ground, I secure the components to the car with tape. The artemis board and motor drivers are snuggly fit in the empty space that the manufacturer's PCB used to be. I designate the front of the car to be where the Artemis board is, and the rear is where the batteries sit. One ToF sensor is in the front, and the other one is in the rear.
-
-<p style="text-align:center;"><img src="..\assets\images\4\car_diagram_1.jpeg" width="950"/></p>
-<p style="text-align:center;"><img src="..\assets\images\4\car_diagram_2.jpeg" width="950"/></p>
-
-The 650mAh battery connected to Artemis sits below the 850mAh battery in the battery box of the car.
-
-<p style="text-align:center;"><img src="..\assets\images\4\car_diagram_3.jpeg" width="950"/></p>
-
-## PWM Lower Limit
-
-At very low PWM values, the car cannot move because there's not enough power to overcome static friction. For straight path, the lower limit PWM value I found is 30. For an on-axis turn, I found the lower limit PWM value is 130. This makes sense because there's much more friction on the wheels when turning on-axis, especially because the car is somewhat rectangular.
-
-<p style="text-align:center;"><iframe width="420" height="600" src="https://www.youtube.com/embed/JglBm9aBzk8" allowfullscreen></iframe></p>
-
-<p style="text-align:center;"><iframe width="420" height="600" src="https://www.youtube.com/embed/gBa6KJq1D6k" allowfullscreen></iframe></p>
-
-<pre><code class="language-cpp">void driveStraight() {
-  analogWrite(ML_FWD, 30);
-  analogWrite(MR_FWD, 30);
-  delay(1200);
-
-  analogWrite(ML_FWD, 0);
-  analogWrite(MR_FWD, 0);
-  delay(2000);
-
-  analogWrite(ML_BWD, 30);
-  analogWrite(MR_BWD, 30);
-  delay(1200);
-
-  analogWrite(MR_BWD, 0);
-  analogWrite(ML_BWD, 0);
-  delay(2000);
-}
-
-void onaxisTurn(){
-  analogWrite(ML_FWD, 130);
-  analogWrite(MR_BWD, 130);
-  delay(5000);
-
-  analogWrite(ML_FWD, 0);
-  analogWrite(MR_BWD, 0);
-  delay(2000);
-
-  analogWrite(ML_BWD, 130);
-  analogWrite(MR_FWD, 130);
-  delay(5000);
-
-  analogWrite(ML_BWD, 0);
-  analogWrite(MR_FWD, 0);
-  delay(2000);
-}
-</code></pre>
-
-## Calibration for Straightness
-
-I ran the car at PWM value of 100 and manually calibrated by multiplying a calibration factor to the PWM value.
-
-<pre><code class="language-cpp">#define ML_FWD 1
-#define ML_BWD 0
-#define MR_FWD 3
-#define MR_BWD 4
-
-// Calibration Factors:
-#define ML_CF 1
-#define MR_CF 0.88
-
-void setup() {
-  pinMode(ML_FWD, OUTPUT);
-  pinMode(ML_BWD, OUTPUT);
-  pinMode(MR_FWD, OUTPUT);
-  pinMode(MR_BWD, OUTPUT);
-
-  Serial.begin(9600);
-  Serial.println("Connected");
-}
-
-void loop() {
-  //Pause: allow time to disconnect battery or reset position
-  delay(15000);
-
-  analogWrite(ML_FWD, 100*ML_CF);
-  analogWrite(MR_FWD, 100*MR_CF);
-  delay(1000);
-
-  analogWrite(ML_FWD, 0);
-  analogWrite(MR_FWD, 0);
-}
-</code></pre>
-
-With a calibration factor of 0.88 on the right motor, I was able to get the car to drive a little more than 6 feet and deviate less than one inch from the straight path. 
-
-<p style="text-align:center;"><iframe width="420" height="600" src="https://www.youtube.com/embed/zNwIZK15-4Y" allowfullscreen></iframe></p>
-
-## Open Loop
-
-In the video below, I demonstrate untethered, open loop control of the car by driving the car in a "square." This entails driving straight for a bit, followed by a roughly 90 degree turn, looped infinitely.
-
-<pre><code class="language-cpp">#define ML_FWD 1
-#define ML_BWD 0
-#define MR_FWD 3
-#define MR_BWD 4
-
-#define ML_CF 1
-#define MR_CF 0.9
-
-void setup() {
-  pinMode(ML_FWD, OUTPUT);
-  pinMode(ML_BWD, OUTPUT);
-  pinMode(MR_FWD, OUTPUT);
-  pinMode(MR_BWD, OUTPUT);
-
-  analogWrite(ML_FWD, 0);
-  analogWrite(ML_BWD, 0);
-  analogWrite(MR_FWD, 0);
-  analogWrite(MR_BWD, 0);
-
-  Serial.begin(9600);
-  Serial.println("Connected");
+<pre><code class="language-cpp">float lin_pid(int dist, float targetDist) {
+  //Serial.println("lin_pid");
+  float error;
+  float pwm;
+  unsigned long current_time = micros();
+  float dt = (current_time - prev_time) / 1e6; // Convert microsec to sec
   
-  //Pause: allow time to disconnect battery or reset position
-  delay(10000);
-}
+  error = dist-targetDist;
+  float deriv = (error - prev_error)/dt;
+  float filter_deriv = d_alpha * deriv + (1 - d_alpha) * prev_deriv;
+  prev_deriv = filter_deriv;
 
-void loop() {
-  // Drive in square
-  driveStraight();
-  turn90deg();
-}
+  sumerror = constrain(sumerror + error * dt, -300, 300);
 
-void driveStraight() {
-  analogWrite(ML_FWD, 90*ML_CF);
-  analogWrite(MR_FWD, 90*MR_CF);
-  delay(800);
+  pwm = Kp*error + Ki*sumerror + Kd*filter_deriv;
 
-  analogWrite(ML_FWD, 0);
-  analogWrite(MR_FWD, 0);
-  delay(1000);
-}
-
-void turn90deg(){
-  analogWrite(ML_FWD, 140);
-  analogWrite(MR_BWD, 140);
-  delay(360);
-
-  analogWrite(ML_FWD, 0);
-  analogWrite(MR_BWD, 0);
-  delay(1000);
+  // Speed constraints
+  if(abs(pwm) > maxSpeed){
+    pwm=copysignf(maxSpeed, pwm);
+  } else if (abs(pwm) < zero_thresh){
+    pwm=0;
+  } 
+  else if(abs(pwm) < minSpeed){
+    pwm=copysignf(minSpeed, pwm);
+  }
+  
+  prev_error = error;  // Update previous error for next iteration
+  prev_time = current_time;
+  return pwm;
 }
 </code></pre>
 
-<p style="text-align:center;"><iframe width="420" height="600" src="https://www.youtube.com/embed/_N9wVkbTpUo" allowfullscreen></iframe></p>
+## Linear Extrapolation
+
+The time of flight sensor had an average timestep of 22.42 ms and the PID loop had an average timestep of 7.60 ms, when I tested the car 3m from the wall. Since the ToF sensor data takes longer to receive than one iteration of the PID loop, the extrapolation function below uses the two previous ToF sensor data to linearly extrapolate an estimated distance at the current time in the PID loop if the ToF sensor data is not available.
+
+<pre><code class="language-cpp">float extrapolateDistance(int d1, int d2, unsigned long t1, unsigned long t2) {
+  unsigned long t = millis();  // current time in ms
+  
+  if (t1 == t2) return d2; //avoid /0
+
+  float v = (float)(d2 - d1) / (float)(t2 - t1); //mm/ms
+  float d = d2 + v*(t - t2);
+  return d;
+}
+</code></pre>
+
+## Set Distance Mode
+
+I had first started testing at 2m away from the wall, so I didn't notice that using short mode for the ToF sensor would be a problem until I started testing at 3m away. The sensor would not give a reading when it was that far away, so I was forced to use long mode. The accruacy reduced when I was using long mode and the car would often overshoot, so I created a function that would switch to short mode if it detected that it was closer than 1.3m from the wall, and long mode if it was greater. This function runs every time the ToF sensor gets a measurement in the PID loop. Since it takes a bit of time to switch modes, I used a flag to remember what mode its set to so it doesn't have to set the mode every time it gets a sensor measurement. Although short mode maximum detection distance is technically 1.3m, it would work a little beyond that (like when I was testing at 2m), so this method worked. Switching between the modes for appropriate distances helped improve the accuracy of the measurements at short distances while also being able to detect longer distances.
+
+<pre><code class="language-cpp">void setDistanceMode(int distance){
+
+    if (distance > 0 && distance <= 1300 && distanceMode) {
+        distanceSensor1.setDistanceModeShort();
+        distanceMode = 0;        //Serial.println("Mode: Short");
+        distanceSensor1.setTimingBudgetInMs(15);
+    }
+    // If distance is invalid (0) or out of range in Short mode, switch back to Long mode
+    else if ((distance == 0 || distance > 1300) && distanceMode == 0) {
+        distanceSensor1.setDistanceModeLong();
+        distanceMode = 1;
+        //Serial.println("Mode: Long");
+        distanceSensor1.setTimingBudgetInMs(33);
+    }
+}
+</code></pre>
+
+## PID Loop
+
+Synthesizing the parts above, the below code shows the PID loop within the main loop. It first collects the ToF sensor data if available, or else extrapolates a distance estimate based on previous sensor data. Then the PID controller calculates the control input which is then used to control the motors.
+
+<pre><code class="language-cpp">if (run_pid){
+  int dist;
+  float pwm;
+
+  if (distanceSensor1.checkForDataReady()) {
+    dist = distanceSensor1.getDistance();
+
+    setDistanceMode(dist);
+
+    if(ToFindex < TOF_SAMPLES){
+      toftime_arr[ToFindex]=millis();
+      ToF_distance[ToFindex]=dist;
+    }
+    distanceSensor1.clearInterrupt();
+    distanceSensor1.stopRanging();
+    distanceSensor1.startRanging();
+    ToFindex++;
+  } else { //extrapolate
+    if(ToFindex>1){
+      dist = extrapolateDistance(ToF_distance[ToFindex-1],ToF_distance[ToFindex-2],toftime_arr[ToFindex-1],toftime_arr[ToFindex-2]);
+    } else {
+      dist = 1500;
+    }                
+  }
+
+  pwm = lin_pid(dist, TARGET_DIST);
+
+  // collect data
+  if(PIDindex < PID_SAMPLES){
+    pidtime_arr[PIDindex] = micros();
+    distance_pid[PIDindex] = dist;
+    pwm_arr[PIDindex] = pwm;
+  }
+  PIDindex++;
+
+  if(pwm > 0){
+    driveStraight(1,pwm);
+  } else if(pwm < 0){
+    driveStraight(0,abs(pwm));
+  } else {
+    stopDriving();
+  }                    
+}
+</code></pre>
+
+## PID Gain Discussion
+I started with tuning Kp (proportional gain), setting the other two gains to 0. I had set the default value Kp = 1, which was way too high so I lowered it. Whenever I noticed a overshoot, I would increase Kd (derivative gain). Increasing Kd would sometimes cause the robot to shudder as it drove if it was too high, so I decreased the alpha for the low-pass filter to weight the previous values more and that helped smooth the control. Whenever the robot slowed and stopped before reaching 1 foot from the wall, I increased Ki (integral gain). 
+
+<p style="text-align:center;"><iframe width="800" height="600" src="https://www.youtube.com/embed/J44NtmZatdw" allowfullscreen></iframe></p>
+
+<p style="text-align:center;"><iframe width="800" height="600" src="https://www.youtube.com/embed/5OpC3tmyL0s" allowfullscreen></iframe></p>
+
+## Final Results
+
+My final gain values are: Kp = 0.04, Ki = 0.047, Kd = 0.03, as well as alpha = 0.07. Below shows videos and graphs of the final result of the car driving from 2m, 3m, and 4m away from the wall, stopping at approximately one foot from the wall. The PWM vs. Time graphs shows the control input the motors are given. The ToF Sensor Distance graphs show the sensor's distance measurements over time. The PID Loop Distance vs. Time graphs show the extrapolated distances that the PID controller uses to calculate the control input. 
+
+### Starting 2 Meters Away from Wall
+
+<p style="text-align:center;"><iframe width="800" height="600" src="https://www.youtube.com/embed/vxkT8VmauhU" allowfullscreen></iframe></p>
+
+<p style="text-align:center;"><img src="..\assets\images\5\2m_PWM.png" width="950"/></p>
+
+<p style="text-align:center;"><img src="..\assets\images\5\2m_PID_Distance.png" width="950"/></p>
+
+<p style="text-align:center;"><img src="..\assets\images\5\2m_TOF.png" width="950"/></p>
+
+### Starting 3 Meters Away from Wall
+
+<p style="text-align:center;"><iframe width="800" height="600" src="https://www.youtube.com/embed/ZYdS-cv6Er0" allowfullscreen></iframe></p>
+
+<p style="text-align:center;"><img src="..\assets\images\5\3m_PWM.png" width="950"/></p>
+
+<p style="text-align:center;"><img src="..\assets\images\5\3m_PID_Distance.png" width="950"/></p>
+
+<p style="text-align:center;"><img src="..\assets\images\5\3m_TOF.png" width="950"/></p>
+
+### Starting 4 Meters Away from Wall
+
+<p style="text-align:center;"><iframe width="800" height="600" src="https://www.youtube.com/embed/31SfJLWSqmg" allowfullscreen></iframe></p>
+
+<p style="text-align:center;"><img src="..\assets\images\5\4m_PWM.png" width="950"/></p>
+
+<p style="text-align:center;"><img src="..\assets\images\5\4m_PID_Distance.png" width="950"/></p>
+
+<p style="text-align:center;"><img src="..\assets\images\5\4m_TOF.png" width="950"/></p>
