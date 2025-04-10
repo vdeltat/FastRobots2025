@@ -79,7 +79,7 @@ void sendpidData_Ori() {
 }
 </code></pre>
 
-## PID Control
+## PID Control for Orientation
 
 For practical purposes I set constraints on the speed. If the PID loop wanted to give a control input greater than the maximum PWM of 250, it would set it at the max PWM. As we found in lab 4, the robot would not be able move at low PWM values, so I set a minimum turning speed at 190 PWM. If the resulting control input from the PID controllers was above the zero threshold, but less than the minimum speed, it would set the control input to the minimum speed so that the robot could actually move. If the control input was lower than a the zero threshold (100 PWM), it would set the control input to zero, since a low enough control input was effectively zero and wouldn't really turn the robot. I put a low-pass filter on the the derivative term to reduce noise, and tuned the alpha value.
 
