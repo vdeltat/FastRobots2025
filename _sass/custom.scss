@@ -144,18 +144,20 @@ footer {
 .gallery-container {
   display: flex;
   justify-content: center;
-  padding: 50px; /* Ensure padding does not conflict */
-  max-width: 1500px; /* Add a limit to prevent breaking layout */
+  padding: 20px; /* Ensure padding does not conflict */
+  max-width: 1200px; /* Add a limit to prevent breaking layout */
   margin: 0 auto;
 }
 
 .project-gallery {
   display: grid;
+  display: flex;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 20px;
   padding: 20px;
   margin: 0 auto;
   max-width: 100%;
+  max-height: 100%;
 }
 
 .gallery-item {
