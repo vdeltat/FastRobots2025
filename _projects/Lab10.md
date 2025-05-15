@@ -114,6 +114,11 @@ permalink: /lab10/
 <p style="text-align:center;"><iframe width="800" height="600" src="https://www.youtube.com/embed/k_Uz_awCz0Q" allowfullscreen></iframe></p>
 
 <p style="text-align:center;"><img src="..\assets\images\10\Trajectory.png" width="800"/></p>
+<p style="text-align:center;"><img src="..\assets\images\10\Data.png" width="800"/></p>
+
+## Conclusion
+
+The bayes filter probably works best in more open or structured regions where the robot likely has strong sensor observations or landmarks to match to. Belief deteriorates in areas with fewer unique features, or in the end when there is an accumulation of heading drift.
 
 
 
