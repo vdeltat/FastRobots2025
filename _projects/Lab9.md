@@ -121,8 +121,8 @@ I plotted the measurements taken at each location on a polar plot and in cartesi
 Below is the combined plot of the points, and plotted with the actual map overlayed on top. There is a lot of noise in the measurements so the map is terrible. As I mentioned before, taking multiple distance measurements at each angle and averaging them would help with this. I also suspect that the ToF sensor might have been tilted a bit towards the ground for some of the measurements, resulting in inaccurate readings.
 
 <p style="text-align:center;">
-  <img src="..\assets\images\9\combined_plot.png" width="500" />
-  <img src="..\assets\images\9\FinalCombinedMap.png" width="500" /> 
+  <img src="..\assets\images\9\combined_plot.png" width="450" />
+  <img src="..\assets\images\9\FinalCombinedMap.png" width="450" /> 
 </p>
 
 
