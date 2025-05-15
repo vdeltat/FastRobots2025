@@ -13,9 +13,9 @@ The objective of this lab was to get a car to drive a max speed towards a wall, 
 
 I hardcoded in the following steps:
 
-1) Drive forwards at max speed (PWM of 255) for 600 ms
-2) Drive backwards at max speed (PWM of -255) for 1200 ms
-3) Stop driving
+1. Drive forwards at max speed (PWM of 255) for 600 ms
+2. Drive backwards at max speed (PWM of -255) for 1200 ms
+3. Stop driving
 
 Code:
 <pre><code class="language-cpp">case FLIP: {
