@@ -13,7 +13,7 @@ My name is Angela Voo, and I am a senior Mechanical Engineering senior at Cornel
 
 <!--Take a look at <a href="{{ "/projects/" | relative_url }}">my projects</a> and <a href="{{ "/cv/" | relative_url }}">CV</a>.-->
 
-Labs:
+Labs (click on text):
 
 <!--<p><a href="{{ "/lab1b/" | relative_url }}">Lab 1B</a></p>-->
 

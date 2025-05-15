@@ -92,28 +92,28 @@ I took these measurements at 5 locations in the static room: the origin (0,0), (
 I plotted the measurements taken at each location on a polar plot and in cartesion coordinates, shown below. 
 
 <p style="text-align:center;">
-  <img src="..\assets\images\9\pp0.png" width="500" />
-  <img src="..\assets\images\9\cp0.png" width="500" /> 
+  <img src="..\assets\images\9\pp0.png" width="450" />
+  <img src="..\assets\images\9\cp0.png" width="450" /> 
 </p>
 
 <p style="text-align:center;">
-  <img src="..\assets\images\9\pp1.png" width="500" />
-  <img src="..\assets\images\9\cp1.png" width="500" /> 
+  <img src="..\assets\images\9\pp1.png" width="450" />
+  <img src="..\assets\images\9\cp1.png" width="450" /> 
 </p>
 
 <p style="text-align:center;">
-  <img src="..\assets\images\9\pp2.png" width="500" />
-  <img src="..\assets\images\9\cp2.png" width="500" /> 
+  <img src="..\assets\images\9\pp2.png" width="450" />
+  <img src="..\assets\images\9\cp2.png" width="450" /> 
 </p>
 
 <p style="text-align:center;">
-  <img src="..\assets\images\9\pp3.png" width="500" />
-  <img src="..\assets\images\9\cp3.png" width="500" /> 
+  <img src="..\assets\images\9\pp3.png" width="450" />
+  <img src="..\assets\images\9\cp3.png" width="450" /> 
 </p>
 
 <p style="text-align:center;">
-  <img src="..\assets\images\9\pp4.png" width="500" />
-  <img src="..\assets\images\9\cp4.png" width="500" /> 
+  <img src="..\assets\images\9\pp4.png" width="450" />
+  <img src="..\assets\images\9\cp4.png" width="450" /> 
 </p>
 
 # Final Map
