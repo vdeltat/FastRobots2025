@@ -118,7 +118,7 @@ permalink: /lab10/
 
 ## Conclusion
 
-The bayes filter probably works best in more open or structured regions where the robot likely has strong sensor observations or landmarks to match to. Belief deteriorates in areas with fewer unique features, or in the end when there is an accumulation of heading drift.
+The bayes filter probably works best in more open or structured regions where the robot likely has strong sensor observations or landmarks to match to. Belief deteriorates in areas with fewer unique features, or in the end when there is an accumulation of heading drift. Overall the belief of the robots position is pretty accurate. The odometry, however, is completely off.
 
 
 
